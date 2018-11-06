@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script>
 $(document).ready(function(){
 $("#flip").click(function(){
