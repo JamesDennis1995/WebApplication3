@@ -40,7 +40,7 @@ namespace WebApplication3
             {
                 Error.Text = "That stock code is already in use.";
             }
-            else if (Code.Text == null && Description.Text == null && PriceUnit.Text == null && !Image.HasFile)
+            else if (Code.Text == null || Description.Text == null || PriceUnit.Text == null || !Image.HasFile)
             {
                 Error.Text = "You must enter something for all fields.";
             }
