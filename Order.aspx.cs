@@ -185,8 +185,8 @@ namespace WebApplication3
                 {
                     basket[ItemToRemove.SelectedIndex - 1].quantity -= Int32.Parse(NumberToRemove.SelectedItem.ToString());
                     basket[ItemToRemove.SelectedIndex - 1].total = Math.Round(basket[ItemToRemove.SelectedIndex - 1].quantity * prices[basket[ItemToRemove.SelectedIndex - 1].number], 2);
-                    table.Rows[ItemToRemove.SelectedIndex - 1][1] = basket[ItemToRemove.SelectedIndex - 1].quantity;
-                    table.Rows[ItemToRemove.SelectedIndex - 1][2] = basket[ItemToRemove.SelectedIndex - 1].total;
+                    table.Rows[ItemToRemove.SelectedIndex - 1][2] = basket[ItemToRemove.SelectedIndex - 1].quantity;
+                    table.Rows[ItemToRemove.SelectedIndex - 1][3] = basket[ItemToRemove.SelectedIndex - 1].total;
                     NumberToRemove.Items.Clear();
                     if (basket[ItemToRemove.SelectedIndex - 1].quantity > 1)
                     {
