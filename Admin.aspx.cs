@@ -11,6 +11,7 @@ namespace WebApplication3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //If an admin login session is set, do nothing. If it is not, return to the admin login page.
             if (Session["AdminUsername"] != null)
             {
                 Welcome.Text = Session["AdminMessage"].ToString();
@@ -23,6 +24,7 @@ namespace WebApplication3
 
         protected void Logout_Click(object sender, EventArgs e)
         {
+            //When the Logout button is clicked, end the current session and return to the admin login page.
             Session.Contents.RemoveAll();
             Session.Abandon();
             Response.Redirect("Admin_Login.aspx");
