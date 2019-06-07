@@ -11,6 +11,7 @@ namespace WebApplication3
 {
     public partial class Admin_Login : System.Web.UI.Page
     {
+        //Declares a hashed password variable.
         static string hashedPassword;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,6 +19,7 @@ namespace WebApplication3
         }
         protected void Login_Click(object sender, EventArgs e)
         {
+            //Declares a connection and SQL command variable.
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             SqlCommand cmd = new SqlCommand();   
             cmd.Connection = conn;
@@ -26,8 +28,10 @@ namespace WebApplication3
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
+                //Retrieves the universal admin password.
                 hashedPassword = reader["AdminPassword"].ToString();
             }
+            //Checks if the hashed password is correct. If it is, grants access. If not, returns an error message.
             bool correct = Salt.Verify(AdminPassword.Text, hashedPassword);
             if (correct == false)
             {
@@ -39,6 +43,7 @@ namespace WebApplication3
                 Session["AdminMessage"] = "Welcome.";
                 Response.Redirect("Admin.aspx");
             }
+            //Closes the database connection.
             conn.Close();
         }
     }
