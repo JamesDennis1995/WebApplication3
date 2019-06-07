@@ -12,6 +12,7 @@
             $("#Preview").prop("hidden", true);
             $("#Preview").prop("style", "height:125px; width:auto;");
             function readURL(input) {
+                //Obtains an uploaded file's location, allowing it to be previewed.
                 if (input.files && input.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
@@ -21,6 +22,7 @@
                 }
             }
             $("#Image").change(function () {
+                //If a JPG file has been uploaded, calls the readURL function which previews it without uploading.
                 if ($(this).val() != "") {
                     var ext = $(this).val().match(/\.(.+)$/)[1];
                     if (ext == "jpg") {
