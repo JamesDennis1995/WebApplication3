@@ -11,6 +11,7 @@ namespace WebApplication3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //If a login session is set, do nothing. If it is not, return to the user login page.
             if (Session["Message"] != null)
             {
 
@@ -23,6 +24,7 @@ namespace WebApplication3
 
         protected void Logout_Click(object sender, EventArgs e)
         {
+            //End the user's session, and return to the user login page.
             Session.Contents.RemoveAll();
             Session.Abandon();
             Response.Redirect("Login.aspx");
