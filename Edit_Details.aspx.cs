@@ -14,6 +14,7 @@ namespace WebApplication3
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //If an admin login session is set, do nothing. If it is not, return to the admin login page.
             if (Session["Message"] != null)
             {
 
@@ -38,6 +39,7 @@ namespace WebApplication3
         }
         protected void Submit_Click(object sender, EventArgs e)
         {
+            //If all fields are blank, generate an error message. Otherwise, declare SQL connection and command variables and update the relevant record in the database with all non-blank fields, update the session message to reflect this, and redirect to the User page.
             if (FirstName.Text == "" && Surname.Text == "" && Password.Text == "" && ContactNumber.Text == "" && Email.Text == "" && Address1.Text == "" && Address2.Text == "" && TownCity.Text == "" && County.Text == "" && Postcode.Text == "")
             {
                 Error.Text = "You must enter at least one variable to edit.";
