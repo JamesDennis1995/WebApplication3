@@ -12,10 +12,12 @@ namespace WebApplication3
 {
     public partial class Check_Orders_Admin : System.Web.UI.Page
     {
+        //Declare table and SQL connection variables.
         static DataTable table = new DataTable();
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            //If an admin login session is not set, return to the admin login page. If it is, check if the page has been posted back. If it has, fill the Orders dropdown menu from the database.
             if (Session["AdminUsername"] != null)
             {
                 if (!IsPostBack)
@@ -47,7 +49,9 @@ namespace WebApplication3
         }
         protected void OrderNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Declare variables.
             var itemToAdd = new Item();
+            //Clear all rows from the table, refill it with all relevant information from the database, and display it.
             table.Rows.Clear();
             if (OrderNumbers.SelectedValue != "")
             {
