@@ -12,6 +12,7 @@ namespace WebApplication3
 {
     public partial class Order : System.Web.UI.Page
     {
+        //Declare list and table variables.
         static List<String> codes = new List<String>();
         static List<String> descriptions = new List<String>();
         static List<decimal> prices = new List<decimal>();
@@ -19,6 +20,7 @@ namespace WebApplication3
         static DataTable table = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //If a login session is set and the page has not been posted back, set all relevant attributes and fill the three lists with all stock information.
             if (Session["Message"] != null)
             {
                 if (!IsPostBack)
@@ -67,6 +69,7 @@ namespace WebApplication3
         protected void Stock_SelectedIndexChanged(object sender, EventArgs e)
         {
             int number = Stock.SelectedIndex;
+            //When the selected index is changed in the Stock dropdown menu, if it is greater than 0, display stock item information.
             if (number > 0)
             {
                 Image.Visible = true;
@@ -84,6 +87,7 @@ namespace WebApplication3
 
         protected void AddToBasket_Click(object sender, EventArgs e)
         {
+            //If no stock item or quantity is selected, generate an error message. If something is entered for both, check if the selected stock code matches anything already in the user's basket. If it does, add the quantity entered by the user to what's already there and update the cost accordingly. If not, add a new item.
             if (Stock.SelectedIndex == 0)
             {
                 Error.Text = "You must first select an item.";
@@ -150,6 +154,7 @@ namespace WebApplication3
 
         protected void ItemToRemove_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Updates the Number to Remove dropdown menu with numbers up to the number of the selected item in the user's basket and "All."
             NumberToRemove.Items.Clear();
             if (ItemToRemove.SelectedIndex > 0)
             {
@@ -165,6 +170,7 @@ namespace WebApplication3
         }
         protected void Remove_Click(object sender, EventArgs e)
         {
+            //If there's nothing in the user's basket, or they have not selected an item to remove, generate an error message. Otherwise, update the relevant locations with how many of the selected item have been removed.
             if (basket.Count == 0)
             {
                 Error.Text = "You have nothing in your basket.";
@@ -204,6 +210,7 @@ namespace WebApplication3
 
         protected void PlaceOrder_Click(object sender, EventArgs e)
         {
+            //If the user's basket is empty, generate an error message. Otherwise, declare SQL connection and command variables, update the relevant tables, change the session message to reflect this, and redirect to the User page.
             if (basket.Count == 0)
             {
                 Error.Text = "You must first have something in your basket.";
