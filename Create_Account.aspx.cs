@@ -18,12 +18,14 @@ namespace WebApplication3
 
         protected void CreateAccount_Click(object sender, EventArgs e)
         {
+            //Check if the user has entered something for all fields (only Address2 can be blank.) If any other field is blank, returns an error message.
             if (FirstName.Text == null || Surname.Text == null || Password.Text == null || ContactNumber.Text == null || Email.Text == null || Address1.Text == null || TownCity.Text == null || County.Text == null || Postcode.Text == null)
             {
                 Error.Text = "You must enter something for all fields.";
             }
             else
             {
+                //Declare SQL connection and command variables, and set them up.
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
                 SqlCommand cmd = new SqlCommand();
                 SqlCommand cmd2 = new SqlCommand();
@@ -44,6 +46,7 @@ namespace WebApplication3
                 cmd2.Parameters.Add("@postcode", SqlDbType.VarChar).Value = Postcode.Text;
                 conn.Open();
                 int rowNumber = (int)cmd.ExecuteScalar();
+                //If the email address entered is a duplicate, generate an error message. If not, create a new user account and return to the starting page.
                 if (rowNumber > 0)
                 {
                     Error.Text = "That email address is already in use.";
