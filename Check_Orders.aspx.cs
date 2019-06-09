@@ -12,10 +12,12 @@ namespace WebApplication3
 {
     public partial class Check_Orders : System.Web.UI.Page
     {
+        //Declare table and SQL connection variables
         static DataTable table = new DataTable();
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
+            //If a login session is set, check if the page has been posted back. If it has, fill the Orders dropdown menu from the database. If a login session is not set, return to the user login page.
             if (Session["Message"] != null)
             {
                 if (!IsPostBack)
@@ -51,8 +53,10 @@ namespace WebApplication3
         {
             if (OrderNumbers.SelectedIndex > 0)
             {
+                //Declare variables.
                 var itemToAdd = new Item();
                 SqlCommand cmd = new SqlCommand();
+                //Clear all rows from the table, refill it with all relevant information from the database, and display it.
                 table.Rows.Clear();
                 cmd.Connection = conn;
                 cmd.CommandText = "SELECT Orders.ID, OrderStock.StockCode, Stock.Description, OrderStock.Quantity, Orders.OrderTotal FROM Stock INNER JOIN ((Customer INNER JOIN Orders ON Customer.Id = Orders.Customer) INNER JOIN OrderStock ON Orders.Id = OrderStock.OrderID) ON Stock.Code = OrderStock.StockCode WHERE Orders.ID = @order";
